@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.utnc.justificantes" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Justificantes UT</name>
+    <description>
+        Sistema de gestión de justificantes para la Universidad Tecnológica
+    </description>
+    <author email="info@utnc.edu.mx" href="https://utnc.edu.mx">
+        UTNC
+    </author>
+    <content src="index.html" />
+    
+    <!-- Permitir acceso a internet para APIs -->
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    
+    <!-- Configuración para plataformas -->
+    <platform name="android">
+        <allow-intent href="market:*" />
+        <preference name="android-targetSdkVersion" value="36" />
+        <preference name="android-minSdkVersion" value="21" />
+    </platform>
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+    </platform>
+    
+    <!-- Configuración web -->
+    <access origin="*" />
+    
+    <!-- Permisos -->
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="Fullscreen" value="false" />
+    <preference name="Orientation" value="portrait" />
+    
+    
+    <!-- CSP para seguridad -->
+    <allow-navigation href="*" />
+    
+    <!-- Content Security Policy para permitir archivos locales -->
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob: file:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'; img-src * data: blob: file:; font-src * data:; connect-src *;" />
+</widget>
+

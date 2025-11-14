@@ -1,0 +1,132 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SkeletonCard from '../../components/SkeletonCard.astro';
+import Skeleton from '../../components/Skeleton.astro';
+---
+
+<BaseLayout title="Dashboard - Maestro">
+	<div class="min-h-screen bg-gray-50">
+		<!-- Header -->
+		<header class="bg-white shadow-sm border-b">
+			<div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-3 sm:py-4">
+				<div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-0">
+					<h1 class="text-xl sm:text-2xl font-bold text-gray-900 truncate">Sistema de Justificantes UT</h1>
+					<div class="flex items-center justify-between sm:justify-end gap-3 sm:gap-4">
+						<span class="text-xs sm:text-sm text-gray-600">
+							Maestro: <span class="font-medium" id="nombreMaestro"><SkeletonCard variant="button" /></span>
+						</span>
+						<a href="../../login/index.html" class="text-xs sm:text-sm text-blue-600 hover:text-blue-700 whitespace-nowrap">Cerrar sesión</a>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<!-- Main Content -->
+		<main class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-4 sm:py-6 lg:py-8">
+			<!-- Estadísticas -->
+			<!-- Skeleton Loader para estadísticas -->
+			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
+				<SkeletonCard variant="stats" />
+				<SkeletonCard variant="stats" />
+				<SkeletonCard variant="stats" />
+				<SkeletonCard variant="stats" />
+			</div>
+
+			<!-- Filtros -->
+			<div class="bg-white rounded-lg shadow-md p-4 sm:p-6 mb-6 sm:mb-8">
+				<div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 sm:gap-4">
+					<div class="w-full sm:w-auto flex-1 sm:flex-none">
+						<label for="filtroEstado" class="block text-sm font-medium text-gray-700 mb-1">
+							Estado
+						</label>
+						<select
+							id="filtroEstado"
+							class="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+						>
+							<option value="todos">Todos</option>
+							<option value="pendiente">Pendientes</option>
+							<option value="aprobado">Aprobados</option>
+							<option value="rechazado">Rechazados</option>
+						</select>
+					</div>
+					<div class="w-full sm:w-auto flex-1 sm:flex-none">
+						<label for="filtroFecha" class="block text-sm font-medium text-gray-700 mb-1">
+							Fecha
+						</label>
+						<input
+							type="date"
+							id="filtroFecha"
+							class="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+						/>
+					</div>
+					<div class="flex items-end w-full sm:w-auto">
+						<button
+							type="button"
+							class="w-full sm:w-auto px-4 py-2 text-sm sm:text-base bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition"
+						>
+							Filtrar
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Tabla de Justificantes -->
+			<div class="bg-white rounded-lg shadow-md overflow-hidden">
+				<div class="px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200">
+					<h2 class="text-lg sm:text-xl font-bold text-gray-900">Justificantes Pendientes</h2>
+				</div>
+				
+				<!-- Skeleton Loader para la tabla -->
+				<div class="overflow-x-auto">
+					<table class="min-w-full divide-y divide-gray-200">
+						<thead class="bg-gray-50">
+							<tr>
+								<th class="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+									Alumno
+								</th>
+								<th class="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+									Estado
+								</th>
+								<th class="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+									Acciones
+								</th>
+							</tr>
+						</thead>
+						<tbody class="bg-white divide-y divide-gray-200">
+							<SkeletonCard variant="table-row" />
+							<SkeletonCard variant="table-row" />
+							<SkeletonCard variant="table-row" />
+							<SkeletonCard variant="table-row" />
+							<SkeletonCard variant="table-row" />
+						</tbody>
+					</table>
+				</div>
+				
+				<!-- Paginación -->
+				<div class="bg-gray-50 px-4 sm:px-6 py-3 sm:py-4 border-t border-gray-200">
+					<div class="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-0">
+						<div class="text-xs sm:text-sm text-gray-700 text-center sm:text-left">
+							Mostrando <span class="font-medium">1</span> a <span class="font-medium">10</span> de <span class="font-medium">12</span> resultados
+						</div>
+						<div class="flex flex-wrap items-center justify-center gap-2">
+							<button class="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+								Anterior
+							</button>
+							<button class="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-white bg-blue-600 border border-blue-600 rounded-lg hover:bg-blue-700 transition">
+								1
+							</button>
+							<button class="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+								2
+							</button>
+							<button class="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+								Siguiente
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
+</BaseLayout>
+
+

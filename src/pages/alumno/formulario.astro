@@ -1,0 +1,666 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Skeleton from '../../components/Skeleton.astro';
+---
+
+<BaseLayout title="Enviar Justificante - Alumno">
+	<div class="min-h-screen bg-gray-50">
+		<!-- Header -->
+		<header class="bg-white shadow-sm border-b">
+			<div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-3 sm:py-4">
+				<div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-0">
+					<h1 class="text-xl sm:text-2xl font-bold text-gray-900 truncate">Sistema de Justificantes UT</h1>
+					<div class="flex items-center justify-between sm:justify-end space-x-3 sm:space-x-4">
+						<span class="text-xs sm:text-sm text-gray-600">Alumno</span>
+						<a href="../../login/index.html" class="text-xs sm:text-sm text-blue-600 hover:text-blue-700 whitespace-nowrap">Cerrar sesión</a>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<!-- Main Content -->
+		<main class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-4 sm:py-6 lg:py-8">
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+				<!-- Columna Izquierda: Formulario -->
+				<div class="bg-white rounded-lg shadow-md p-4 sm:p-6 lg:p-8">
+					<div class="mb-4 sm:mb-6">
+						<h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-1 sm:mb-2">Nuevo Justificante</h2>
+						<p class="text-sm sm:text-base text-gray-600">Completa el formulario para enviar tu justificante</p>
+					</div>
+
+					<form class="space-y-4 sm:space-y-6">
+					<!-- Información del Alumno -->
+					<div class="border-b pb-4 sm:pb-6">
+						<h3 class="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">Información del Alumno</h3>
+						<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+							<div>
+								<label for="matricula" class="block text-sm font-medium text-gray-700 mb-1">
+									Matrícula
+								</label>
+								<input
+									type="text"
+									id="matricula"
+									name="matricula"
+									required
+									class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition placeholder:text-gray-400"
+									placeholder="Ingresa tu matrícula"
+								/>
+							</div>
+							<div>
+								<label for="nombre" class="block text-sm font-medium text-gray-700 mb-1">
+									Nombre completo
+								</label>
+								<input
+									type="text"
+									id="nombre"
+									name="nombre"
+									required
+									class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition placeholder:text-gray-400"
+									placeholder="Ingresa tu nombre completo"
+								/>
+							</div>
+							<div>
+								<label for="carrera" class="block text-sm font-medium text-gray-700 mb-1">
+									Carrera
+								</label>
+								<input
+									type="text"
+									id="carrera"
+									name="carrera"
+									required
+									class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition placeholder:text-gray-400"
+									placeholder="Ingresa tu carrera"
+								/>
+							</div>
+							<div>
+								<label for="semestre" class="block text-sm font-medium text-gray-700 mb-1">
+									Semestre
+								</label>
+								<select
+									id="semestre"
+									name="semestre"
+									required
+									class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+								>
+									<option value="">Selecciona un semestre</option>
+									<option value="1">1° Semestre</option>
+									<option value="2">2° Semestre</option>
+									<option value="3">3° Semestre</option>
+									<option value="4">4° Semestre</option>
+									<option value="5">5° Semestre</option>
+									<option value="6">6° Semestre</option>
+									<option value="7">7° Semestre</option>
+									<option value="8">8° Semestre</option>
+									<option value="9">9° Semestre</option>
+									<option value="10">10° Semestre</option>
+								</select>
+							</div>
+						</div>
+					</div>
+
+					<!-- Información del Justificante -->
+					<div class="border-b pb-4 sm:pb-6">
+						<h3 class="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">Información del Justificante</h3>
+						<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+							<div>
+								<label for="fechaInicio" class="block text-sm font-medium text-gray-700 mb-1">
+									Fecha de inicio
+								</label>
+								<input
+									type="date"
+									id="fechaInicio"
+									name="fechaInicio"
+									required
+									class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+								/>
+							</div>
+							<div>
+								<label for="fechaFin" class="block text-sm font-medium text-gray-700 mb-1">
+									Fecha de fin
+								</label>
+								<input
+									type="date"
+									id="fechaFin"
+									name="fechaFin"
+									required
+									class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+								/>
+							</div>
+							<div class="sm:col-span-2">
+								<label for="motivo" class="block text-sm font-medium text-gray-700 mb-1">
+									Motivo
+								</label>
+								<select
+									id="motivo"
+									name="motivo"
+									required
+									class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+								>
+									<option value="">Selecciona un motivo</option>
+									<option value="enfermedad">Enfermedad</option>
+									<option value="emergencia">Emergencia familiar</option>
+									<option value="medico">Cita médica</option>
+									<option value="personal">Asunto personal</option>
+									<option value="otro">Otro</option>
+								</select>
+							</div>
+							<div class="sm:col-span-2">
+								<label for="descripcion" class="block text-sm font-medium text-gray-700 mb-1">
+									Descripción
+								</label>
+								<textarea
+									id="descripcion"
+									name="descripcion"
+									rows="3"
+									required
+									class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none resize-none placeholder:text-gray-400"
+									placeholder="Describe el motivo de tu justificante..."
+								></textarea>
+							</div>
+							<div class="sm:col-span-2">
+								<label class="block text-sm font-medium text-gray-700 mb-1">
+									Adjuntar comprobante (PDF, JPG, PNG)
+								</label>
+								
+								<!-- Botón principal para abrir selector -->
+								<button
+									type="button"
+									id="btnAbrirSelector"
+									class="mt-1 w-full flex items-center justify-center px-6 py-4 border-2 border-blue-400 border-dashed rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 hover:border-blue-500 transition-all duration-200 shadow-sm hover:shadow-md"
+								>
+									<svg class="w-6 h-6 mr-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+									</svg>
+									<span class="text-base font-semibold text-blue-700">Seleccionar Imagen o PDF</span>
+								</button>
+								
+								<input id="archivo" name="archivo" type="file" class="sr-only" accept="image/*,.pdf" />
+								
+								<!-- Modal/Overlay para selector de imágenes (estilo WhatsApp/Instagram) -->
+								<div id="selectorModal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black bg-opacity-60 backdrop-blur-sm">
+									<div class="min-h-screen px-4 flex items-center justify-center">
+										<div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden transform transition-all">
+											<!-- Header del modal -->
+											<div class="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4 flex items-center justify-between">
+												<h3 class="text-xl font-bold text-white">Seleccionar Archivo</h3>
+												<button
+													type="button"
+													id="btnCerrarModal"
+													class="text-white hover:text-gray-200 transition"
+												>
+													<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+														<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+													</svg>
+												</button>
+											</div>
+											
+											<!-- Opciones del selector -->
+											<div class="p-6 space-y-3">
+												<!-- Opción: Cámara -->
+												<button
+													type="button"
+													id="opcionCamara"
+													class="w-full flex items-center p-4 rounded-xl bg-gray-50 hover:bg-blue-50 border-2 border-transparent hover:border-blue-300 transition-all duration-200 group"
+												>
+													<div class="flex-shrink-0 w-12 h-12 rounded-full bg-blue-100 group-hover:bg-blue-200 flex items-center justify-center transition-colors">
+														<svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+															<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+															<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+														</svg>
+													</div>
+													<div class="ml-4 flex-1 text-left">
+														<p class="text-base font-semibold text-gray-900 group-hover:text-blue-700">Tomar Foto</p>
+														<p class="text-sm text-gray-500">Usar la cámara de tu dispositivo</p>
+													</div>
+													<svg class="w-5 h-5 text-gray-400 group-hover:text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+														<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+													</svg>
+												</button>
+												
+												<!-- Opción: Galería -->
+												<button
+													type="button"
+													id="opcionGaleria"
+													class="w-full flex items-center p-4 rounded-xl bg-gray-50 hover:bg-blue-50 border-2 border-transparent hover:border-blue-300 transition-all duration-200 group"
+												>
+													<div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-100 group-hover:bg-purple-200 flex items-center justify-center transition-colors">
+														<svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+															<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+														</svg>
+													</div>
+													<div class="ml-4 flex-1 text-left">
+														<p class="text-base font-semibold text-gray-900 group-hover:text-blue-700">Galería de Fotos</p>
+														<p class="text-sm text-gray-500">Elegir de tus fotos guardadas</p>
+													</div>
+													<svg class="w-5 h-5 text-gray-400 group-hover:text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+														<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+													</svg>
+												</button>
+												
+												<!-- Opción: Archivos -->
+												<label
+													for="archivoDesdeModal"
+													class="w-full flex items-center p-4 rounded-xl bg-gray-50 hover:bg-blue-50 border-2 border-transparent hover:border-blue-300 transition-all duration-200 group cursor-pointer"
+												>
+													<div class="flex-shrink-0 w-12 h-12 rounded-full bg-green-100 group-hover:bg-green-200 flex items-center justify-center transition-colors">
+														<svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+															<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+														</svg>
+													</div>
+													<div class="ml-4 flex-1 text-left">
+														<p class="text-base font-semibold text-gray-900 group-hover:text-blue-700">Archivos</p>
+														<p class="text-sm text-gray-500">Seleccionar PDF o imagen del dispositivo</p>
+													</div>
+													<svg class="w-5 h-5 text-gray-400 group-hover:text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+														<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+													</svg>
+													<input id="archivoDesdeModal" type="file" class="sr-only" accept="image/*,.pdf" />
+												</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<!-- Vista previa del archivo seleccionado (mejorada) -->
+								<div id="previewContainer" class="mt-4 hidden">
+									<div class="relative bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-4 border-2 border-gray-200 shadow-sm">
+										<div class="flex items-start gap-4">
+											<!-- Preview de imagen/PDF -->
+											<div class="flex-shrink-0">
+												<div id="imagePreview" class="hidden">
+													<img id="previewImage" src="" alt="Vista previa" class="w-24 h-24 object-cover rounded-lg border-2 border-gray-300 shadow-md" />
+												</div>
+												<div id="pdfPreview" class="hidden">
+													<div class="w-24 h-24 bg-gradient-to-br from-red-100 to-red-200 rounded-lg border-2 border-red-300 flex items-center justify-center shadow-md">
+														<svg class="w-12 h-12 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+															<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+														</svg>
+													</div>
+												</div>
+											</div>
+											<!-- Información del archivo -->
+											<div class="flex-1 min-w-0">
+												<div class="flex items-start justify-between gap-2">
+													<div class="flex-1 min-w-0">
+														<p id="archivoNombre" class="text-sm font-bold text-gray-900 truncate"></p>
+														<p id="archivoTamaño" class="text-xs text-gray-600 mt-1"></p>
+														<p id="archivoTipo" class="inline-block mt-2 px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-700"></p>
+													</div>
+													<button
+														type="button"
+														id="btnEliminarPreview"
+														class="flex-shrink-0 bg-red-500 text-white rounded-full p-2 hover:bg-red-600 transition shadow-md hover:shadow-lg"
+														title="Eliminar archivo"
+													>
+														<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+															<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+														</svg>
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<p class="mt-2 text-xs text-gray-500 text-center">PDF, PNG, JPG hasta 10MB</p>
+							</div>
+						</div>
+					</div>
+
+					<!-- Botones -->
+					<div class="flex flex-col-reverse sm:flex-row justify-end gap-3 sm:gap-4 pt-4">
+						<button
+							type="button"
+							class="w-full sm:w-auto px-4 sm:px-6 py-2.5 sm:py-2 border border-gray-300 rounded-lg text-sm sm:text-base text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition"
+						>
+							Cancelar
+						</button>
+						<button
+							type="submit"
+							class="w-full sm:w-auto px-4 sm:px-6 py-2.5 sm:py-2 border border-transparent rounded-lg shadow-sm text-sm sm:text-base text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition"
+						>
+							Enviar Justificante
+						</button>
+					</div>
+					</form>
+				</div>
+
+				<!-- Columna Derecha: Mis Justificantes -->
+				<div class="bg-white rounded-lg shadow-md p-4 sm:p-6 lg:p-8">
+					<h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Mis Justificantes</h2>
+					
+					<!-- Skeleton Loader para justificantes -->
+					<div class="space-y-3 sm:space-y-4">
+						<div class="border border-gray-200 rounded-lg p-3 sm:p-4 animate-pulse">
+							<div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-0">
+								<div class="flex-1 min-w-0">
+									<Skeleton width="w-full" height="h-4 sm:h-5" className="mb-2" rounded="lg" />
+									<Skeleton width="w-3/4" height="h-3 sm:h-4" rounded="lg" />
+								</div>
+								<Skeleton width="w-16 sm:w-20" height="h-5 sm:h-6" rounded="full" className="self-start sm:self-auto" />
+							</div>
+						</div>
+						<div class="border border-gray-200 rounded-lg p-3 sm:p-4 animate-pulse">
+							<div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-0">
+								<div class="flex-1 min-w-0">
+									<Skeleton width="w-5/6" height="h-4 sm:h-5" className="mb-2" rounded="lg" />
+									<Skeleton width="w-2/3" height="h-3 sm:h-4" rounded="lg" />
+								</div>
+								<Skeleton width="w-16 sm:w-20" height="h-5 sm:h-6" rounded="full" className="self-start sm:self-auto" />
+							</div>
+						</div>
+						<div class="border border-gray-200 rounded-lg p-3 sm:p-4 animate-pulse">
+							<div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-0">
+								<div class="flex-1 min-w-0">
+									<Skeleton width="w-full" height="h-4 sm:h-5" className="mb-2" rounded="lg" />
+									<Skeleton width="w-3/4" height="h-3 sm:h-4" rounded="lg" />
+								</div>
+								<Skeleton width="w-16 sm:w-20" height="h-5 sm:h-6" rounded="full" className="self-start sm:self-auto" />
+							</div>
+						</div>
+						<div class="border border-gray-200 rounded-lg p-3 sm:p-4 animate-pulse">
+							<div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-0">
+								<div class="flex-1 min-w-0">
+									<Skeleton width="w-4/5" height="h-4 sm:h-5" className="mb-2" rounded="lg" />
+									<Skeleton width="w-2/3" height="h-3 sm:h-4" rounded="lg" />
+								</div>
+								<Skeleton width="w-16 sm:w-20" height="h-5 sm:h-6" rounded="full" className="self-start sm:self-auto" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
+</BaseLayout>
+
+<script>
+	// Manejo de carga de archivos con selector personalizado (estilo WhatsApp/Instagram)
+	document.addEventListener('DOMContentLoaded', () => {
+		const btnAbrirSelector = document.getElementById('btnAbrirSelector');
+		const selectorModal = document.getElementById('selectorModal');
+		const btnCerrarModal = document.getElementById('btnCerrarModal');
+		const opcionCamara = document.getElementById('opcionCamara');
+		const opcionGaleria = document.getElementById('opcionGaleria');
+		const inputArchivo = document.getElementById('archivo') as HTMLInputElement;
+		const inputArchivoModal = document.getElementById('archivoDesdeModal') as HTMLInputElement;
+		const previewContainer = document.getElementById('previewContainer');
+		const previewImage = document.getElementById('previewImage') as HTMLImageElement;
+		const archivoNombre = document.getElementById('archivoNombre');
+		const btnEliminarPreview = document.getElementById('btnEliminarPreview');
+		const imagePreview = document.getElementById('imagePreview');
+		const pdfPreview = document.getElementById('pdfPreview');
+		const archivoTamaño = document.getElementById('archivoTamaño');
+		const archivoTipo = document.getElementById('archivoTipo');
+		
+		// Verificar si estamos en Cordova (móvil)
+		const isCordova = typeof (window as any).cordova !== 'undefined';
+		
+		// Abrir modal del selector
+		if (btnAbrirSelector && selectorModal) {
+			btnAbrirSelector.addEventListener('click', () => {
+				selectorModal.classList.remove('hidden');
+			});
+		}
+		
+		// Cerrar modal
+		function cerrarModal() {
+			if (selectorModal) {
+				selectorModal.classList.add('hidden');
+			}
+		}
+		
+		if (btnCerrarModal) {
+			btnCerrarModal.addEventListener('click', cerrarModal);
+		}
+		
+		// Cerrar al hacer clic fuera del modal
+		if (selectorModal) {
+			selectorModal.addEventListener('click', (e) => {
+				if (e.target === selectorModal) {
+					cerrarModal();
+				}
+			});
+		}
+		
+		// Función para formatear el tamaño del archivo
+		function formatearTamaño(bytes: number): string {
+			if (bytes === 0) return '0 Bytes';
+			const k = 1024;
+			const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+			const i = Math.floor(Math.log(bytes) / Math.log(k));
+			return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+		}
+		
+		// Función para obtener el tipo de archivo
+		function obtenerTipoArchivo(file: File): string {
+			if (file.type.startsWith('image/')) {
+				return 'Imagen';
+			} else if (file.type === 'application/pdf') {
+				return 'PDF';
+			}
+			return 'Archivo';
+		}
+		
+		// Función para manejar la vista previa del archivo seleccionado
+		function mostrarPreview(file: File | null, dataUrl?: string, fileName?: string, fileType?: string) {
+			if (!previewContainer || !archivoNombre) return;
+			
+			if (file || dataUrl) {
+				const esImagen = file ? file.type.startsWith('image/') : (fileType?.startsWith('image/') || !fileType || dataUrl?.startsWith('data:image'));
+				const esPDF = file ? file.type === 'application/pdf' : (fileType === 'application/pdf' || fileName?.toLowerCase().endsWith('.pdf'));
+				
+				// Mostrar/ocultar previews según el tipo
+				if (imagePreview && pdfPreview) {
+					if (esImagen) {
+						imagePreview.classList.remove('hidden');
+						pdfPreview.classList.add('hidden');
+					} else if (esPDF) {
+						imagePreview.classList.add('hidden');
+						pdfPreview.classList.remove('hidden');
+					} else {
+						imagePreview.classList.add('hidden');
+						pdfPreview.classList.add('hidden');
+					}
+				}
+				
+				if (dataUrl) {
+					// Si viene de Cordova (Data URL)
+					if (esImagen && previewImage) {
+						previewImage.src = dataUrl;
+					}
+					archivoNombre.textContent = fileName || 'Archivo seleccionado';
+					if (archivoTamaño) archivoTamaño.textContent = '';
+					if (archivoTipo) archivoTipo.textContent = esImagen ? 'Imagen' : (esPDF ? 'PDF' : 'Archivo');
+				} else if (file) {
+					// Si viene del input file
+					if (esImagen) {
+						const reader = new FileReader();
+						reader.onload = (e) => {
+							if (e.target?.result && previewImage) {
+								previewImage.src = e.target.result as string;
+							}
+						};
+						reader.readAsDataURL(file);
+					}
+					
+					archivoNombre.textContent = file.name;
+					if (archivoTamaño) archivoTamaño.textContent = formatearTamaño(file.size);
+					if (archivoTipo) archivoTipo.textContent = obtenerTipoArchivo(file);
+				}
+				
+				previewContainer.classList.remove('hidden');
+			} else {
+				// Ocultar preview
+				previewContainer.classList.add('hidden');
+				if (previewImage) previewImage.src = '';
+				if (archivoNombre) archivoNombre.textContent = '';
+				if (archivoTamaño) archivoTamaño.textContent = '';
+				if (archivoTipo) archivoTipo.textContent = '';
+			}
+		}
+		
+		// Función para convertir Data URL a File
+		function dataURLtoFile(dataurl: string, filename: string): File {
+			const arr = dataurl.split(',');
+			const mime = arr[0].match(/:(.*?);/)?.[1] || 'image/jpeg';
+			const bstr = atob(arr[1]);
+			let n = bstr.length;
+			const u8arr = new Uint8Array(n);
+			while (n--) {
+				u8arr[n] = bstr.charCodeAt(n);
+			}
+			return new File([u8arr], filename, { type: mime });
+		}
+		
+		// Función para usar la cámara
+		function tomarFoto() {
+			cerrarModal();
+			if (!isCordova) {
+				// En navegador, usar input con capture
+				if (inputArchivo) {
+					inputArchivo.setAttribute('capture', 'environment');
+					inputArchivo.click();
+					inputArchivo.removeAttribute('capture');
+				}
+				return;
+			}
+			
+			// En Cordova, usar el plugin de cámara (si está disponible)
+			if ((window as any).navigator?.camera) {
+				(window as any).navigator.camera.getPicture(
+					(imageData: string) => {
+						const dataUrl = 'data:image/jpeg;base64,' + imageData;
+						const fileName = 'foto-' + Date.now() + '.jpg';
+						mostrarPreview(null, dataUrl, fileName, 'image/jpeg');
+						
+						const file = dataURLtoFile(dataUrl, fileName);
+						const dataTransfer = new DataTransfer();
+						dataTransfer.items.add(file);
+						if (inputArchivo) {
+							inputArchivo.files = dataTransfer.files;
+						}
+					},
+					(error: string) => {
+						console.error('Error al tomar foto:', error);
+						alert('Error al tomar la foto. Por favor, intenta de nuevo.');
+					},
+					{
+						quality: 75,
+						destinationType: (window as any).Camera.DestinationType.DATA_URL,
+						sourceType: (window as any).Camera.PictureSourceType.CAMERA,
+						allowEdit: true,
+						encodingType: (window as any).Camera.EncodingType.JPEG,
+						targetWidth: 1024,
+						targetHeight: 1024,
+						saveToPhotoAlbum: false
+					}
+				);
+			} else {
+				// Fallback: usar input con capture
+				if (inputArchivo) {
+					inputArchivo.setAttribute('capture', 'environment');
+					inputArchivo.click();
+				}
+			}
+		}
+		
+		// Función para elegir de galería
+		function elegirDeGaleria() {
+			cerrarModal();
+			if (!isCordova) {
+				// En navegador, usar input normal
+				if (inputArchivo) {
+					inputArchivo.removeAttribute('capture');
+					inputArchivo.click();
+				}
+				return;
+			}
+			
+			// En Cordova, usar el plugin de cámara con galería (si está disponible)
+			if ((window as any).navigator?.camera) {
+				(window as any).navigator.camera.getPicture(
+					(imageData: string) => {
+						const dataUrl = 'data:image/jpeg;base64,' + imageData;
+						const fileName = 'imagen-' + Date.now() + '.jpg';
+						mostrarPreview(null, dataUrl, fileName, 'image/jpeg');
+						
+						const file = dataURLtoFile(dataUrl, fileName);
+						const dataTransfer = new DataTransfer();
+						dataTransfer.items.add(file);
+						if (inputArchivo) {
+							inputArchivo.files = dataTransfer.files;
+						}
+					},
+					(error: string) => {
+						console.error('Error al seleccionar imagen:', error);
+						alert('Error al seleccionar la imagen. Por favor, intenta de nuevo.');
+					},
+					{
+						quality: 75,
+						destinationType: (window as any).Camera.DestinationType.DATA_URL,
+						sourceType: (window as any).Camera.PictureSourceType.PHOTOLIBRARY,
+						allowEdit: true,
+						encodingType: (window as any).Camera.EncodingType.JPEG,
+						targetWidth: 1024,
+						targetHeight: 1024,
+						mediaType: (window as any).Camera.MediaType.PICTURE
+					}
+				);
+			} else {
+				// Fallback: usar input normal
+				if (inputArchivo) {
+					inputArchivo.removeAttribute('capture');
+					inputArchivo.click();
+				}
+			}
+		}
+		
+		// Event listeners para las opciones del modal
+		if (opcionCamara) {
+			opcionCamara.addEventListener('click', tomarFoto);
+		}
+		
+		if (opcionGaleria) {
+			opcionGaleria.addEventListener('click', elegirDeGaleria);
+		}
+		
+		// Manejar selección desde el input principal
+		if (inputArchivo) {
+			inputArchivo.addEventListener('change', (e) => {
+				const target = e.target as HTMLInputElement;
+				if (target.files && target.files.length > 0) {
+					mostrarPreview(target.files[0]);
+					cerrarModal();
+				}
+			});
+		}
+		
+		// Manejar selección desde el input del modal
+		if (inputArchivoModal) {
+			inputArchivoModal.addEventListener('change', (e) => {
+				const target = e.target as HTMLInputElement;
+				if (target.files && target.files.length > 0) {
+					// Asignar al input principal
+					const dataTransfer = new DataTransfer();
+					dataTransfer.items.add(target.files[0]);
+					if (inputArchivo) {
+						inputArchivo.files = dataTransfer.files;
+					}
+					mostrarPreview(target.files[0]);
+					cerrarModal();
+				}
+			});
+		}
+		
+		if (btnEliminarPreview) {
+			btnEliminarPreview.addEventListener('click', () => {
+				mostrarPreview(null);
+				if (inputArchivo) {
+					inputArchivo.value = '';
+				}
+			});
+		}
+	});
+</script>
+

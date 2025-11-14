@@ -1,0 +1,45 @@
+{
+  "name": "proyectojustificantesut",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "build:cordova": "astro build && node scripts/fix-cordova-paths.js && node scripts/move-assets.js && copy cordova-config.xml www\\config.xml",
+    "prepare:android": "cd www && npx cordova prepare android",
+    "postbuild": "copy cordova-config.xml www\\config.xml",
+    "preview": "astro preview",
+    "preview:cordova": "copy cordova-config.xml www\\config.xml && npx http-server www -p 8000 -o",
+    "cordova:platform": "cd www && npx cordova platform",
+    "cordova:add:web": "cd www && npx cordova platform add browser",
+    "cordova:add:android": "cd www && npx cordova platform add android",
+    "cordova:requirements": "cd www && npx cordova requirements android",
+    "cordova:clean": "cd www && npx cordova clean",
+    "cordova:clean:android": "cd www && npx cordova clean android",
+    "cordova:run:web": "copy cordova-config.xml www\\config.xml && npx http-server www -p 8000 -o",
+    "cordova:build:web": "npm run build && cd www && npx cordova build browser",
+    "cordova:build:android": "npm run build:cordova && cd www && npx cordova prepare android && npx cordova build android && cd .. && adb install -r platforms\\android\\app\\build\\outputs\\apk\\debug\\app-debug.apk && adb shell monkey -p com.utnc.justificantes -c android.intent.category.LAUNCHER 1",
+    "cordova:build:android:release": "npm run build:cordova && cd www && npx cordova prepare android && npx cordova build android --release",
+    "cordova:run:android": "npm run build:cordova && cd www && npx cordova prepare android && npx cordova run android",
+    "cordova:install:android": "adb install -r platforms\\android\\app\\build\\outputs\\apk\\debug\\app-debug.apk && adb shell monkey -p com.utnc.justificantes -c android.intent.category.LAUNCHER 1",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@ionic-native/camera": "5.36.0",
+    "@tailwindcss/vite": "^4.1.17",
+    "astro": "^5.15.4",
+    "tailwindcss": "^4.1.17"
+  },
+  "devDependencies": {
+    "cordova": "^12.0.0",
+    "cordova-android": "^14.0.1",
+    "glob": "^11.0.3",
+    "http-server": "^14.1.1"
+  },
+  "cordova": {
+    "platforms": [
+      "android"
+    ],
+    "plugins": {}
+  }
+}

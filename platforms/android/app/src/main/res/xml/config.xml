@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.utnc.justificantes" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Justificantes UT</name>
+    <description>
+        Sistema de gestión de justificantes para la Universidad Tecnológica
+    </description>
+    <author email="info@utnc.edu.mx" href="https://utnc.edu.mx">
+        UTNC
+    </author>
+    <content src="index.html" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <access origin="*" />
+    <allow-navigation href="*" />
+    <meta content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob: file:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'; img-src * data: blob: file:; font-src * data:; connect-src *;" http-equiv="Content-Security-Policy" />
+    <allow-intent href="market:*" />
+    <preference name="loglevel" value="DEBUG" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="Fullscreen" value="false" />
+    <preference name="Orientation" value="portrait" />
+    <preference name="android-targetSdkVersion" value="36" />
+    <preference name="android-minSdkVersion" value="21" />
+</widget>

@@ -1,0 +1,30 @@
+---
+// Componente de Skeleton Loader reutilizable
+interface Props {
+	width?: string;
+	height?: string;
+	className?: string;
+	rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full';
+}
+
+const { 
+	width = 'w-full', 
+	height = 'h-4', 
+	className = '',
+	rounded = 'md'
+} = Astro.props;
+
+const roundedClass = {
+	none: 'rounded-none',
+	sm: 'rounded-sm',
+	md: 'rounded-md',
+	lg: 'rounded-lg',
+	full: 'rounded-full'
+}[rounded];
+---
+
+<div 
+	class={`${width} ${height} ${roundedClass} bg-gray-200 animate-pulse ${className}`}
+	aria-hidden="true"
+></div>
+

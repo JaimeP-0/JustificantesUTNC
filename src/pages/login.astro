@@ -1,0 +1,256 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Login - Sistema de Justificantes">
+	<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4 py-8">
+		<div class="max-w-md w-full space-y-6 sm:space-y-8 bg-white p-6 sm:p-8 rounded-xl shadow-lg">
+			<div class="text-center">
+				<h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Sistema de Justificantes UT</h1>
+				<p class="text-sm sm:text-base text-gray-600">Inicia sesión con tu cuenta</p>
+			</div>
+
+			<form class="mt-6 sm:mt-8 space-y-4 sm:space-y-6">
+				<div class="space-y-3 sm:space-y-4">
+					<div>
+						<label for="matricula" class="block text-sm font-medium text-gray-700 mb-1">
+							Matrícula
+						</label>
+						<input
+							id="matricula"
+							name="matricula"
+							type="text"
+							required
+							class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition placeholder:text-gray-400"
+							placeholder="Ingresa tu matrícula"
+							maxlength="8"
+						/>
+						<p id="matriculaHint" class="mt-1 text-xs text-gray-500"></p>
+						<input type="hidden" id="userType" name="userType" />
+					</div>
+
+					<div>
+						<label for="password" class="block text-sm font-medium text-gray-700 mb-1">
+							Contraseña
+						</label>
+						<input
+							id="password"
+							name="password"
+							type="password"
+							required
+							class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition placeholder:text-gray-400"
+							placeholder="••••••••"
+						/>
+					</div>
+				</div>
+
+				<div>
+					<button
+						type="submit"
+						class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition"
+					>
+						Iniciar sesión
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</BaseLayout>
+
+<script>
+	// Sistema de detección automática de tipo de usuario basado en la matrícula
+	const matriculaInput = document.getElementById('matricula') as HTMLInputElement;
+	const userTypeHidden = document.getElementById('userType') as HTMLInputElement;
+	const matriculaHint = document.getElementById('matriculaHint');
+	let tipoDetectado: string | null = null;
+
+	// Detectar tipo de usuario basado en la matrícula
+	function detectarTipoUsuario(matricula: string): string | null {
+		if (!matricula || !userTypeHidden) {
+			tipoDetectado = null;
+			if (userTypeHidden) userTypeHidden.value = '';
+			if (matriculaHint) {
+				matriculaHint.textContent = 'El sistema detectará automáticamente si eres alumno o maestro';
+				matriculaHint.className = 'mt-1 text-xs text-gray-500';
+			}
+			return null;
+		}
+
+		// Si son solo números y tienen 8 dígitos, es alumno
+		if (/^[0-9]{8}$/.test(matricula)) {
+			tipoDetectado = 'alumno';
+			userTypeHidden.value = 'alumno';
+			if (matriculaHint) {
+				matriculaHint.textContent = '✓ Detectado: Alumno (8 números)';
+				matriculaHint.className = 'mt-1 text-xs text-green-600 font-medium';
+			}
+			return 'alumno';
+		}
+		// Si tiene 4 caracteres alfanuméricos, es maestro
+		else if (/^[A-Za-z0-9]{4}$/.test(matricula)) {
+			tipoDetectado = 'maestro';
+			userTypeHidden.value = 'maestro';
+			if (matriculaHint) {
+				matriculaHint.textContent = '✓ Detectado: Maestro (4 caracteres)';
+				matriculaHint.className = 'mt-1 text-xs text-blue-600 font-medium';
+			}
+			return 'maestro';
+		}
+		// Si está ingresando pero aún no cumple el formato
+		else if (/^[0-9]*$/.test(matricula) && matricula.length < 8) {
+			tipoDetectado = null;
+			userTypeHidden.value = '';
+			if (matriculaHint) {
+				matriculaHint.textContent = 'Ingresando matrícula de alumno (8 números requeridos)';
+				matriculaHint.className = 'mt-1 text-xs text-gray-500';
+			}
+			return null;
+		}
+		else if (/^[A-Za-z0-9]*$/.test(matricula) && matricula.length < 4 && matricula.length > 0) {
+			tipoDetectado = null;
+			userTypeHidden.value = '';
+			if (matriculaHint) {
+				matriculaHint.textContent = 'Ingresando matrícula de maestro (4 caracteres requeridos)';
+				matriculaHint.className = 'mt-1 text-xs text-gray-500';
+			}
+			return null;
+		}
+		// Formato inválido
+		else {
+			tipoDetectado = null;
+			userTypeHidden.value = '';
+			if (matriculaHint) {
+				matriculaHint.textContent = 'Formato inválido. Use 8 números (alumno) o 4 caracteres (maestro)';
+				matriculaHint.className = 'mt-1 text-xs text-red-500';
+			}
+			return null;
+		}
+	}
+
+	// Event listener para el input de matrícula
+	if (matriculaInput) {
+		matriculaInput.addEventListener('input', (e) => {
+			const target = e.target as HTMLInputElement;
+			if (!target) return;
+			
+			let valor = target.value.trim();
+			
+			// Permitir números y letras, pero aplicar lógica según lo que se está escribiendo
+			// Si empieza con números, solo permitir números (alumno)
+			// Si empieza con letras o es corto, permitir letras y números (maestro)
+			
+			if (/^[0-9]/.test(valor) || (/^[0-9]*$/.test(valor) && valor.length > 0)) {
+				// Si empieza con números o son solo números, tratar como alumno
+				valor = valor.replace(/[^0-9]/g, '');
+				valor = valor.slice(0, 8);
+				target.value = valor;
+			} else {
+				// Si tiene letras o es una entrada corta, tratar como maestro
+				valor = valor.replace(/[^A-Za-z0-9]/g, '');
+				valor = valor.slice(0, 4).toUpperCase();
+				target.value = valor;
+			}
+			
+			// Detectar el tipo automáticamente
+			detectarTipoUsuario(valor);
+		});
+	}
+
+	// Credenciales ficticias para login de demostración
+	const credenciales = {
+		alumno: {
+			matricula: '10011001',
+			password: '123'
+		},
+		maestro: {
+			matricula: '1001',
+			password: '123'
+		}
+	};
+
+	// Validación del formulario antes de enviar
+	const form = document.querySelector('form');
+	if (form) {
+		form.addEventListener('submit', (e) => {
+			e.preventDefault();
+			
+			if (!matriculaInput) return;
+			
+			const matricula = matriculaInput.value.trim();
+			const passwordInput = document.getElementById('password') as HTMLInputElement;
+			if (!passwordInput) return;
+			const password = passwordInput.value;
+		
+		// Detectar tipo antes de validar
+		const tipo = detectarTipoUsuario(matricula);
+		
+		if (!tipo) {
+			if (matricula.length === 0) {
+				alert('Por favor, ingresa tu matrícula');
+			} else if (/^[0-9]*$/.test(matricula) && matricula.length < 8) {
+				alert('La matrícula de alumno debe tener exactamente 8 números');
+			} else if (/^[A-Za-z0-9]*$/.test(matricula) && matricula.length < 4) {
+				alert('La matrícula de maestro debe tener exactamente 4 caracteres');
+			} else {
+				alert('Formato de matrícula inválido. Use 8 números (alumno) o 4 caracteres alfanuméricos (maestro)');
+			}
+			matriculaInput.focus();
+			return false;
+		}
+		
+		// Validar formato específico
+		if (tipo === 'alumno' && !/^[0-9]{8}$/.test(matricula)) {
+			alert('La matrícula de alumno debe tener exactamente 8 números');
+			matriculaInput.focus();
+			return false;
+		}
+		
+		if (tipo === 'maestro' && !/^[A-Za-z0-9]{4}$/.test(matricula)) {
+			alert('La matrícula de maestro debe tener exactamente 4 caracteres alfanuméricos');
+			matriculaInput.focus();
+			return false;
+		}
+
+		// Validar credenciales
+		if (tipo !== 'alumno' && tipo !== 'maestro') {
+			return;
+		}
+		
+		const credencial = credenciales[tipo];
+		if (matricula === credencial.matricula && password === credencial.password) {
+			// Login exitoso - guardar en sessionStorage
+			sessionStorage.setItem('usuario', JSON.stringify({
+				tipo: tipo,
+				matricula: matricula
+			}));
+			
+			// Redirigir según el tipo de usuario (rutas relativas para Cordova)
+			if (tipo === 'alumno') {
+				window.location.href = '../alumno/formulario/index.html';
+			} else if (tipo === 'maestro') {
+				window.location.href = '../maestro/dashboard/index.html';
+			}
+		} else {
+			// Credenciales incorrectas
+			alert('Matrícula o contraseña incorrectas');
+			if (passwordInput) {
+				passwordInput.value = '';
+				passwordInput.focus();
+			}
+		}
+		});
+	}
+
+	// Detectar cuando el usuario pega texto
+	if (matriculaInput) {
+		matriculaInput.addEventListener('paste', () => {
+			setTimeout(() => {
+				if (matriculaInput) {
+					const valor = matriculaInput.value.trim();
+					detectarTipoUsuario(valor);
+				}
+			}, 10);
+		});
+	}
+</script>
+
